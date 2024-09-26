@@ -1,6 +1,13 @@
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from Models.init import Base
 from DataBase.connection import getConnection
+
+# Crear el engine de la base de datos
+engine = create_engine('mysql+mysqlconnector://root:@localhost/freetimedb')
+
+# Crear una clase Session que permita manejar las sesiones de la base de datos
+Session = sessionmaker(bind=engine)
 
 def sync():
     # Obtén la conexión a la base de datos
@@ -9,9 +16,6 @@ def sync():
         print("No se pudo conectar a la base de datos")
         return
 
-    # Crear un engine con la URL de conexión
-    engine = create_engine('mysql+mysqlconnector://root:@localhost/freetimedb')
-    
     # Crear todas las tablas
     Base.metadata.create_all(engine)
     print("Base de datos sincronizada")
@@ -21,6 +25,3 @@ def sync():
 
 if __name__ == "__main__":
     sync()
-
-
-
