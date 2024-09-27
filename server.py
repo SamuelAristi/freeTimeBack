@@ -10,4 +10,4 @@ app.register_blueprint(support_router)  # Registrar el blueprint del soporte
 
 
 
-app.run(host='127.0.0.1', port=1336, debug=True)
+app.run(host='127.0.0.1', port=1337, debug=True)
