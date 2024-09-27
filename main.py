@@ -15,5 +15,5 @@ if __name__ == "__main__":
         server_process.join()  # Espera a que el servidor se detenga
     except KeyboardInterrupt:
         print("Deteniendo el servidor...")
-        server_process.terminate()  # Termina el proceso hijo
-        server_process.join()  # Asegúrate de que el proceso hijo haya terminado
+        server_process.terminate()  
+        server_process.join()  
