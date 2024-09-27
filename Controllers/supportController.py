@@ -1,51 +1,83 @@
-from Models.supportModel import Support
-from Models.userModel import User  
-from sync import Session  
+from DataBase.connection import getConnection
 from datetime import datetime
 
 # Función para crear un soporte
 def create_support(support_description, user_id, support_state_id):
+    connection = getConnection()
+    cursor = connection.cursor()
+
+    # Crear la query para insertar un nuevo soporte
+    query = """
+        INSERT INTO support (support_date, support_description, user_id, support_state_id)
+        VALUES (%s, %s, %s, %s)
+    """
+    
     try:
-        session = Session()  # Inicia la sesión
-        
-        new_support = Support(
-            support_date=datetime.now(),
-            support_description=support_description,
-            user_id=user_id,
-            support_state_id=support_state_id
-        )
-        
-        session.add(new_support)  
-        session.commit()  
-        return new_support
+        # Ejecutar la query con los parámetros
+        cursor.execute(query, (datetime.now(), support_description, user_id, support_state_id))
+        connection.commit()
+        return {
+            "success": True,
+            "message": "Soporte creado exitosamente.",
+            "support_data": {
+                "support_description": support_description,
+                "user_id": user_id,
+                "support_state_id": support_state_id
+            }
+        }
     except Exception as e:
         print(f"Error al crear soporte: {str(e)}")
-        return None
+        connection.rollback()
+        return {
+            "success": False,
+            "message": f"Error al crear soporte: {str(e)}"
+        }
     finally:
-        session.close()  
-
+        cursor.close()
+        connection.close()
+        
 # Función para listar todos los soportes junto con los datos del usuario
 def get_supports():
+    connection = getConnection()
+    cursor = connection.cursor()
+
+    # Crear la query para obtener soportes y los datos del usuario
+    query = """
+        SELECT s.support_id, s.support_description, s.support_date, s.user_id, 
+               s.support_state_id, u.user_full_name, u.user_email
+        FROM support s
+        JOIN user u ON s.user_id = u.user_id
+    """
+
     try:
-        session = Session()  # Inicia la sesión
-        
-        # Realiza un join entre Support y User
-        supports = session.query(Support, User).join(User, Support.user_id == User.user_id).all()
-        
-        # Crea la lista con los soportes y la información del usuario
-        support_list = [{
-            "support_id": s.Support.support_id, 
-            "support_description": s.Support.support_description,
-            "support_date": s.Support.support_date,
-            "user_id": s.Support.user_id,
-            "support_state_id": s.Support.support_state_id,
-            "user_name": s.User.user_full_name,  
-            "user_email": s.User.user_email 
-        } for s in supports]
-        
-        return support_list
+        # Ejecutar la query
+        cursor.execute(query)
+        supports = cursor.fetchall()
+
+        # Formatear los resultados en una lista de diccionarios
+        support_list = []
+        for support in supports:
+            support_list.append({
+                "support_id": support[0],
+                "support_description": support[1],
+                "support_date": support[2],
+                "user_id": support[3],
+                "support_state_id": support[4],
+                "user_name": support[5],
+                "user_email": support[6]
+            })
+
+        return {
+            "success": True,
+            "supports": support_list
+        }
+
     except Exception as e:
         print(f"Error al listar soportes: {str(e)}")
-        return None
+        return {
+            "success": False,
+            "message": f"Error al listar soportes: {str(e)}"
+        }
     finally:
-        session.close()  
+        cursor.close()
+        connection.close()
