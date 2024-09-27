@@ -1,13 +1,11 @@
 from flask import Flask
-from Routers.cityRouter import city_router  # Importa un conjunto de rutas (router) desde otro archivo
+from Routers.cityRouter import city_router  
 from Routers.supportRouter import support_router
 
-app = Flask(__name__)  # Crea una instancia de la aplicación Flask
+app = Flask(__name__)
 
-# Registrar el blueprint de city
-app.register_blueprint(city_router)  # Añade el conjunto de rutas al servidor Flask
-app.register_blueprint(support_router)  # Registrar el blueprint del soporte
+# Registrar los blueprints
+app.register_blueprint(city_router)
+app.register_blueprint(support_router)
 
 
-
-app.run(host='127.0.0.1', port=1336, debug=True)

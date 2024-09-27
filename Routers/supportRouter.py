@@ -28,4 +28,4 @@ def list_supports_route():
     if supports is not None:
         return jsonify(supports), 200
     else:
-        return jsonify({"error": "Error al listar los soportes"}), 500
+        return jsonify({"error": "Error al listar los soportes"}),  500
