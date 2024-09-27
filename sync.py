@@ -7,7 +7,7 @@ from DataBase.connection import getConnection
 engine = create_engine('mysql+mysqlconnector://root:@localhost/freetimedb')
 
 # Crear una clase Session que permita manejar las sesiones de la base de datos
-Session = sessionmaker(bind=engine)
+#Session = sessionmaker(bind=engine)
 
 def sync():
     # Obtén la conexión a la base de datos
@@ -19,6 +19,8 @@ def sync():
     # Crear todas las tablas
     Base.metadata.create_all(engine)
     print("Base de datos sincronizada")
+
+
 
     # Cierra la conexión
     connection.close()
