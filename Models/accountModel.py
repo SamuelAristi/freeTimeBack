@@ -10,6 +10,7 @@ class Account(Base):
     account_Type_id = Column(Integer, ForeignKey('AccountType.account_Type_id'),nullable=False)
     user_id = Column(Integer, ForeignKey('User.user_id'),nullable=False)  # ID del rol (llave foránea)
 
+    
     def __repr__(self):
         return (f"<Account(account_id={self.account_id}, "
         f"account_number={self.account_number}, " 
