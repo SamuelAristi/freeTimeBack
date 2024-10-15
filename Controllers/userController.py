@@ -84,4 +84,3 @@ def list_users():
         cursor.close()
         connection.close()
 
-        
