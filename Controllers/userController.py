@@ -71,4 +71,3 @@ def list_users():
     finally:
         cursor.close()
         connection.close()
-
