@@ -83,3 +83,8 @@ def list_users():
     finally:
         cursor.close()
         connection.close()
+        print(f"Error al listar los usuarios {e}")
+        return None
+    finally:
+        cursor.close()
+        connection.close()
