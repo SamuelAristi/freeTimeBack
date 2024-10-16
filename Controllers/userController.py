@@ -3,7 +3,7 @@ from Models.userModel import User
 from Models.roleModel import Role
 from Models.userRoleModel import UsersRole
 
-def add_user(user_full_name, user_address, user_email, user_nickname, user_document, user_password, user_photo, user_enable, user_points, user_phone_number, city_id, role_id):
+def add_user(user_full_name, user_address, user_email, user_nickname, user_document, user_password, user_photo, user_enable, user_phone_number, city_id, role_id):
     connection = getConnection()
     cursor = connection.cursor()
 
@@ -20,10 +20,10 @@ def add_user(user_full_name, user_address, user_email, user_nickname, user_docum
 
     # Crear el usuario
     query = """
-        INSERT INTO User (user_full_name, user_address, user_email, user_nickname, user_document, user_password, user_photo, user_enable, user_points, user_phone_number, city_id)
+        INSERT INTO User (user_full_name, user_address, user_email, user_nickname, user_document, user_password, user_photo, user_enable, user_phone_number, city_id)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
-    cursor.execute(query, (user_full_name, user_address, user_email, user_nickname, user_document, user_password, user_photo, user_enable, user_points, user_phone_number, city_id))
+    cursor.execute(query, (user_full_name, user_address, user_email, user_nickname, user_document, user_password, user_photo, user_enable, user_phone_number, city_id))
     user_id = cursor.lastrowid
 
     # Crear la entrada en la tabla UsersRole
@@ -70,7 +70,6 @@ def list_users():
                 'user_password' :user[6],
                 'user_photo':user[7],
                 'user_enable' :user[8],
-                'User_points' :user[9],
                 'user_phone_number' :user[10],
                 'city_id':user[11],
             })
