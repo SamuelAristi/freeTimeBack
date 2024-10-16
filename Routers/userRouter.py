@@ -17,7 +17,6 @@ def add_user_route():
     user_password = user_data.get('user_password')
     user_photo = user_data.get('user_photo')
     user_enable = user_data.get('user_enable')
-    user_points = user_data.get('user_points')
     user_phone_number = user_data.get('user_phone_number')
     city_id = user_data.get('city_id')
     role_id = data.get('role_id')
@@ -29,8 +28,7 @@ def add_user_route():
     # Llamar a la función add_user con todos los parámetros
     response = add_user(
         user_full_name, user_address, user_email, user_nickname, 
-        user_document, user_password, user_photo, user_enable, 
-        user_points, user_phone_number, city_id, role_id
+        user_document, user_password, user_photo, user_enable, user_phone_number, city_id, role_id
     )
     
     if response:
