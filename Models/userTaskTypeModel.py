@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, ForeignKey
 from Models.init import Base
 
 class UsersTaskTypeId(Base):
-    __tablename__ = 'UsersTaskTypeId'
+    __tablename__ = 'UsersTaskType'
 
     user_task_type_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('User.user_id'),nullable=False)  
