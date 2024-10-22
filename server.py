@@ -10,8 +10,6 @@ app = Flask(__name__)
 # Direccion del frontend
 CORS(app, origins=["http://localhost:4200"])
 
-app = Flask(__name__)
-
 # Registrar los blueprints
 app.register_blueprint(city_router)
 app.register_blueprint(support_router)
