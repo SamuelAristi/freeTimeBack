@@ -23,3 +23,4 @@ from .accountModel import Account
 from .accountTypeModel import AccountType
 from .userRoleModel import UsersRole
 from .supportStateModel import SupportState
+from .userTaskTypeModel import UsersTaskTypeId
