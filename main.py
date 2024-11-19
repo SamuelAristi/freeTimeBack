@@ -3,7 +3,7 @@ from multiprocessing import Process
 from server import app  
 
 def run_server():
-    app.run(host='127.0.0.1', port=1337 , debug=True, use_reloader=False)
+    app.run(host='127.0.0.1', port=1338 , debug=True, use_reloader=False)
 
 
 if __name__ == "__main__":

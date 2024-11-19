@@ -20,6 +20,8 @@ def create_support(support_description, user_id, support_state_id):
             "success": True,
             "message": "Soporte creado exitosamente.",
             "support_data": {
+                "support_id": support_id,  # Ahora retorna el ID del soporte creado
+                "user_email": user_email,  # Ahora retorna el correo del usuario
                 "support_description": support_description,
                 "user_id": user_id,
                 "support_state_id": support_state_id
